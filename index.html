@@ -3,12 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>조원 출석 시스템</title>
+
+    <!--####################################################################-->
+    <meta name="author" content="@jiminutive_">
+    <meta name="keywords" content="품성 출석 시스템">
+    <meta name="description" content="품성 출석 시스템">
+
+    <!--sns share-->
+    <meta property="og:url" content="https://agasepoom.netlify.app" />
+    <meta property="og:title" content="품성 출석 시스템" />
+    <meta property="og:type" content="website" />
+    <!--<meta property="og:image" content="img/shareImage.png" />-->
+    <meta property="og:description" content="품성 출석 시스템" />
+
+    <!--favicon-->
+    <link rel="shortcut icon" href="img/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="img/favicon.png" />
+    <!--####################################################################-->
+
+    <title>품성 출석 시스템</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background: linear-gradient(to bottom, #ffc0cb, #f9d0de); /* 분홍색 그라데이션 */
+            background: lightgray;
             font-size: 12px;
             margin: 0; /* 기본 margin 제거 */
             height: 100vh; /* 화면 전체 높이 사용 */
@@ -17,27 +36,39 @@
             align-items: center;
         }
         #main {
-            background-color: white;
-            width: 65%;
+            background-color: #0F162A;
+            width: 80%;
             max-width: 400px; /* 최대 너비 설정 */
             text-align: center;
             border-radius: 12px;
-            padding: 20px; /* 패딩 추가 */
+            padding: 0px; /* 패딩 추가 */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+            color: white;
+        }
+        #main img {
+            border-radius: 12px;
+            margin-bottom: 20px; /* Add margin bottom to create space */
+        }
+
+        /* Add media query for smaller screens if needed */
+        @media (max-width: 768px) {
+            #main {
+                width: 90%; /* Adjust width for smaller screens */
+            }
         }
         p {
             font-size: 30px;
         }
         button {
             padding: 2px 5px;
-            font-size: 10px;
+            font-size: 15px;
             cursor: pointer;
             margin: 5px;
         }
         #추가 {
           width: 70px;
           height: 32px;
-          font-size: 12px;
+          font-size: 15px;
           border: 0;
           border-radius: 50px;
           outline: none;
@@ -48,7 +79,7 @@
         #확인 {
           width: 70px;
           height: 32px;
-          font-size: 12px;
+          font-size: 15px;
           border: 0;
           border-radius: 50px;
           outline: none;
@@ -67,6 +98,7 @@
         .form-group label {
             flex: 0 0 100px; /* 고정 너비 설정 */
             margin-right: 10px;
+            font-size: 15px;
         }
         .form-group input {
             flex: 1;
@@ -75,41 +107,40 @@
         input {
             width: 10px;
             height: 32px;
-            font-size: 12px;
+            font-size: 15px;
             border: 0;
             border-radius: 50px;
             outline: none;
-            padding-left: 15px;
-            padding-right: 15px;
+            padding-left: 7px;
+            padding-right: 7px;
             background-color: rgb(233, 233, 233);
           }
     </style>
 </head>
 
 <body>
-    <section id="main" class="col-lg-6 col-md-8 col-sm-10 col-12 mx-auto">
+    <section id="main" class=" mx-auto">
 
         <div class="col-lg-6 col-md-8 col-sm-10 col-12 mx-auto">
-          <p style="font-size:10px;"><br><br><br>아름다운 가정을 세우는 품성</p>
-          <h1 style="font-size:25px; font-weight:3000;" >출석 시스템<br><br></h1>
+          <img src="img/header.png" alt="header.png" style="max-width: 100%; height: auto;">
 
             <form
                 id="attendanceForm"
                 method="POST"
                 action="https://script.google.com/macros/s/AKfycbyZdEtrAMTHrmUI9tIWv_qEk3ocElwkkhI9AFh6WA1ruXNkDvgEAhzlHmo2CnKd3dZiZA/exec"
-            >
+            ><br>
                 <div class="form-group">
                     <label for="date">날짜</label>
-                    <input id="date" name="날짜" type="date" required>
+                    <input id="date" style="text-align: center" name="날짜" type="date" required>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                 </div>
                 <div class="form-group">
                     <label for="leader">조장</label>
-                    <input id="leader" name="조장" type="text" placeholder="조장 이름" required>
+                    <input id="leader" name="조장" type="text" required>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                 </div>
                 <div id="members">
                     <div class="form-group">
                         <label>조원</label>
-                        <input name="조원[]" type="text" placeholder="조원 이름" required>
+                        <input name="조원[]" type="text" required>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                     </div>
                 </div><br>
                 <button id="추가" type="button" onclick="addMember()">추가</button>
@@ -124,7 +155,7 @@
                 var container = document.getElementById("members");
                 var memberInput = document.createElement("div");
                 memberInput.classList.add("form-group");
-                memberInput.innerHTML = '<label>조원</label><input name="조원[]" type="text" placeholder="조원 이름" required>';
+                memberInput.innerHTML = '<label>조원</label><input name="조원[]" type="text">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
                 container.appendChild(memberInput);
             }
 
