@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조원 출석 시스템</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(to bottom, #ffc0cb, #f9d0de); /* 분홍색 그라데이션 */
+            font-size: 12px;
+            margin: 0; /* 기본 margin 제거 */
+            height: 100vh; /* 화면 전체 높이 사용 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #main {
+            background-color: white;
+            width: 65%;
+            max-width: 400px; /* 최대 너비 설정 */
+            text-align: center;
+            border-radius: 12px;
+            padding: 20px; /* 패딩 추가 */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+        }
+        p {
+            font-size: 30px;
+        }
+        button {
+            padding: 2px 5px;
+            font-size: 10px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        #추가 {
+          width: 70px;
+          height: 32px;
+          font-size: 12px;
+          border: 0;
+          border-radius: 50px;
+          outline: none;
+          padding-left: 15px;
+          padding-right: 15px;
+          background-color: lightgray;
+        }
+        #확인 {
+          width: 70px;
+          height: 32px;
+          font-size: 12px;
+          border: 0;
+          border-radius: 50px;
+          outline: none;
+          padding-left: 15px;
+          padding-right: 15px;
+          background-color: #98bf64;
+
+        }
+
+        .form-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px; /* 요소 사이 간격 추가 */
+        }
+        .form-group label {
+            flex: 0 0 100px; /* 고정 너비 설정 */
+            margin-right: 10px;
+        }
+        .form-group input {
+            flex: 1;
+            max-width: 100px;
+        }
+        input {
+            width: 10px;
+            height: 32px;
+            font-size: 12px;
+            border: 0;
+            border-radius: 50px;
+            outline: none;
+            padding-left: 15px;
+            padding-right: 15px;
+            background-color: rgb(233, 233, 233);
+          }
+    </style>
+</head>
+
+<body>
+    <section id="main" class="col-lg-6 col-md-8 col-sm-10 col-12 mx-auto">
+
+        <div class="col-lg-6 col-md-8 col-sm-10 col-12 mx-auto">
+          <p style="font-size:10px;"><br><br><br>아름다운 가정을 세우는 품성</p>
+          <h1 style="font-size:25px; font-weight:3000;" >출석 시스템<br><br></h1>
+
+            <form
+                id="attendanceForm"
+                method="POST"
+                action="https://script.google.com/macros/s/AKfycbyZdEtrAMTHrmUI9tIWv_qEk3ocElwkkhI9AFh6WA1ruXNkDvgEAhzlHmo2CnKd3dZiZA/exec"
+            >
+                <div class="form-group">
+                    <label for="date">날짜</label>
+                    <input id="date" name="날짜" type="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="leader">조장</label>
+                    <input id="leader" name="조장" type="text" placeholder="조장 이름" required>
+                </div>
+                <div id="members">
+                    <div class="form-group">
+                        <label>조원</label>
+                        <input name="조원[]" type="text" placeholder="조원 이름" required>
+                    </div>
+                </div><br>
+                <button id="추가" type="button" onclick="addMember()">추가</button>
+                <button id="확인" type="button" onclick="submitForm()">확인</button><br><br>
+            </form>
+
+            <p style="font-size:9px;"><br>ⓒ 2024.아가세품. All rights reserved.</p><br><br>
+        </div>
+
+        <script>
+            function addMember() {
+                var container = document.getElementById("members");
+                var memberInput = document.createElement("div");
+                memberInput.classList.add("form-group");
+                memberInput.innerHTML = '<label>조원</label><input name="조원[]" type="text" placeholder="조원 이름" required>';
+                container.appendChild(memberInput);
+            }
+
+            function submitForm() {
+                var leaderName = document.getElementById("leader").value;
+                var members = document.getElementsByName("조원[]");
+                for (var i = 0; i < members.length; i++) {
+                    var hiddenInput = document.createElement("input");
+                    hiddenInput.setAttribute("type", "hidden");
+                    hiddenInput.setAttribute("name", "조원");
+                    hiddenInput.setAttribute("value", members[i].value);
+                    document.getElementById("attendanceForm").appendChild(hiddenInput);
+                }
+                document.getElementById("attendanceForm").submit(); // 폼 제출
+            }
+        </script>
+    </section>
+</body>
+</html>
